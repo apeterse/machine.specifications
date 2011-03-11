@@ -53,6 +53,15 @@
 
 <for each="var supplement in spec.Supplements">
   <for each="var item in supplement.Value">
+    <if condition='item.Key.StartsWith("Test")'>
+      <var name="Guid.NewGuid()" />
+      <div id="${name}" class="grayed" >${item.Value}</div>
+    </if>
+  </for>
+</for>
+
+<for each="var supplement in spec.Supplements">
+  <for each="var item in supplement.Value">
     <if condition='item.Key.StartsWith("img-")'>
       <var name="Guid.NewGuid()" />
       <div>

@@ -7,6 +7,11 @@
   color: lightgrey;
 }
 
+.grayed {
+  color: lightgrey;
+  font-size: .8em;
+}
+
 .failure, .notimplemented, .ignored {
   color: red;
   font-weight: bold;

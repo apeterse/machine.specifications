@@ -134,6 +134,7 @@
     </None>
     <None Include="Generation\Spark\Templates\_Assembly.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Generation\Spark\Templates\_Concern.spark">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

@@ -5,7 +5,7 @@
 </h1>
 <h2 class="count">
   ${assembly.TotalConcerns} ${Pluralize("CodeUnit", assembly.TotalConcerns)},
-  ${assembly.TotalContexts} ${Pluralize("Specs", assembly.TotalContexts)},
+  ${assembly.TotalContexts} ${Pluralize("Spec", assembly.TotalContexts)},
   <if condition="assembly.FailingSpecifications > 0">,
     <span class="failure">${assembly.FailingSpecifications} ${Pluralize("failure", assembly.FailingSpecifications)}</span>
   </if>
