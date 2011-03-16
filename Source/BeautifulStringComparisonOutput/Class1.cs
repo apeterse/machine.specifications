@@ -23,7 +23,7 @@ namespace BeautifulStringComparisonOutput
                                         Environment.NewLine +
                                         "  But was:  \"...nt ut labore et dolore magna aaliquyam erat, sed diam volu...\"" +
                                         Environment.NewLine +
-                                        "  --------------------------------------------^",
+                                        "  ---------------------------------------------^",
                       actualMessage;
 
         Because of = () =>
@@ -49,6 +49,9 @@ namespace BeautifulStringComparisonOutput
 
         It should_return_the_length_of_the_expected_and_the_actual_strings =
             () => actualMessage2.ShouldContain(expectedMessage2);
+
+        It should_contain_the_expected_message = () => actualMessage2.ShouldContain(string.Concat("  Expected: \"", input1,"\""));
+
     }
 
     [Subject("NUnit exception message formatter")]
@@ -56,7 +59,7 @@ namespace BeautifulStringComparisonOutput
     {
         static string actualMessage2,
                         input2 = "Hallo welt!",
-                        input1 = "Hallo Welt!" ,
+                        input1 = "Hallo Welt!",
                         expectedMessage2 = "Strings differ at index 6.";
 
         Because of2 = () =>
@@ -66,18 +69,21 @@ namespace BeautifulStringComparisonOutput
 
         It should_return_the_Position_of_the_different_char =
             () => actualMessage2.ShouldContain(expectedMessage2);
+
+        It should_not_return_the_string_lenght = () => { actualMessage2.ShouldNotContain("Expected string length"); };
     }
+
 
     public class NUnitExceptionMessageFormatter
     {
         public static string Compare(string original, string result)
         {
-            return string.Format("Expected string length {0} but was {1}. Strings differ at index {2}." + Environment.NewLine +
+            return string.Format("{0}Strings differ at index {1}." + Environment.NewLine +
                    "  Expected: \"...nt ut labore et dolore magna aliquyam erat, sed diam volup...\"" +
                    Environment.NewLine +
                    "  But was:  \"...nt ut labore et dolore magna aaliquyam erat, sed diam volu...\"" +
                    Environment.NewLine +
-                   "  --------------------------------------------^", result.Length, original.Length, FirstDifferentChar(original, result));
+                   "  ---------------------------------------------^", GetExpectedStringLengthMessage(result, original), FirstDifferentChar(original, result));
 
         }
 
@@ -88,11 +94,18 @@ namespace BeautifulStringComparisonOutput
                 if (result.Length < i)
                     return i;
 
-                if(result[i] != original[i])
+                if (result[i] != original[i])
                     return i;
             }
             return 0;
         }
 
+        private static string GetExpectedStringLengthMessage(string original, string result)
+        {
+            if (original.Length == result.Length)
+                return string.Empty;
+
+            return string.Format("Expected string length {0} but was {1}. ", original.Length, result.Length);
+        }
     }
 }
